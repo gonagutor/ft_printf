@@ -1,0 +1,8 @@
+*.o
+ni_*
+.vscode
+./ni
+*.a
+*.so
+.DS_Store
+*.gch
