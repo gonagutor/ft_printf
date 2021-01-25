@@ -6,3 +6,6 @@ ni_*
 *.so
 .DS_Store
 *.gch
+main.c
+*.out
+.dist
