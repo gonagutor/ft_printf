@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/01/25 17:01:50 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/01/26 17:10:39 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,29 @@ char	*ft_insert_on_position(int from, int upto, const char* strto, char* strfrom
 	char *ret;
 
 	ret = malloc(ft_strlen((char*)strto) - (upto + 1 - from) + ft_strlen(strfrom));
-	ft_strlcpy(ret, strto, from);
-	ft_strlcpy(ret, strfrom, ft_strlen(strfrom));
-	ft_strlcpy(ret, strto + upto + 1, ft_strlen((char*)strto));
+	ft_strlcpy(ret, strto, from + 1);
+	ft_strlcat(ret, strfrom, ft_strlen(strfrom) + ft_strlen(ret) + 1);
+	ft_strlcat(ret, &strto[upto + 1], ft_strlen(ret) + ft_strlen((char *)&strto[upto]) + 1);
 	return (ret);
+}
+
+void	ft_puthex(unsigned long x)
+{
+	int		num;
+	char	hex[17];
+
+	hex[17] = "0123456789abcdef";
+	// THIS HAS NOT BEEN TESTED TODO: TEST THIS
+	ft_putchar_fd(hex[x % 16], 1);
+	if (x / 10 > 0)
+		ft_puthex(x / 10);
 }
 
 int		ft_printf(const char *str, ...)
 {
 	va_list argptr;
 	int		i;
-	char	*ret;
-	char	*temp;
 
-	ret = NULL;
 	va_start(argptr, str);
 	i = 0;
 	while (str[i] != '\0')
@@ -44,20 +53,20 @@ int		ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			if (str[i + 1] == 's')
-				ret = ft_insert_on_position(i, i + 1, str, va_arg(argptr, char*));
-			// TODO: Check for every single case and it's sub cases
-			i++;
+				ft_putstr_fd(va_arg(argptr, char*), 1);
+			if (str[i + 1] == 'd')
+				ft_putnbr_fd(va_arg(argptr, int), 1);
+			if (str[i + 1] == 'c')
+				ft_putchar_fd(va_arg(argptr, int), 1);
+			if (str[i + 1] == '%')
+				ft_putchar_fd('%', 1);
+			if (str[i + 1] == 'p')
+				ft_puthex((unsigned long)va_arg(argptr, void*));
+			i += 2;
 			continue;
 		}
-		temp = malloc(i + 1);
-		ft_strlcpy(temp, str, i);
-		if (ret)
-			free(ret);
-		ret = temp;
+		ft_putchar_fd(str[i], 1);
 		i++;
 	}
-	ret[i + 1] = '\0';
-	ft_putstr_fd(ret, 1);
-	free(ret);
 	return (0);
 }
