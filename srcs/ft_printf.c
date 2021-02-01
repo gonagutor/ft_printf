@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/01/26 17:10:39 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/02/01 17:17:45 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,18 @@ char	*ft_insert_on_position(int from, int upto, const char* strto, char* strfrom
 	return (ret);
 }
 
-void	ft_puthex(unsigned long x)
+char	ft_base(int i)
 {
-	int		num;
-	char	hex[17];
+	if (i > 9)
+		return (i - 10 + 97);
+	return (i + 48);
+}
 
-	hex[17] = "0123456789abcdef";
-	// THIS HAS NOT BEEN TESTED TODO: TEST THIS
-	ft_putchar_fd(hex[x % 16], 1);
-	if (x / 10 > 0)
-		ft_puthex(x / 10);
+void	ft_putnubrbase(unsigned long x, int may, int base)
+{
+	if (x / base > 0)
+		ft_putnubrbase(x / base, may, base);
+	ft_putchar_fd((may) ? ft_toupper(ft_base(x % base)) : ft_base(x % base), 1);
 }
 
 int		ft_printf(const char *str, ...)
@@ -54,14 +56,25 @@ int		ft_printf(const char *str, ...)
 		{
 			if (str[i + 1] == 's')
 				ft_putstr_fd(va_arg(argptr, char*), 1);
-			if (str[i + 1] == 'd')
+			if (str[i + 1] == 'd' || str[i + 1] == 'd')
 				ft_putnbr_fd(va_arg(argptr, int), 1);
 			if (str[i + 1] == 'c')
 				ft_putchar_fd(va_arg(argptr, int), 1);
 			if (str[i + 1] == '%')
 				ft_putchar_fd('%', 1);
 			if (str[i + 1] == 'p')
-				ft_puthex((unsigned long)va_arg(argptr, void*));
+			{
+				ft_putstr_fd("0x", 1);
+				ft_putnubrbase((unsigned long)va_arg(argptr, void*), 0, 16);
+			}
+			if (str[i + 1] == 'x')
+				ft_putnubrbase(va_arg(argptr, unsigned int), 0, 16);
+			if (str[i + 1] == 'X')
+				ft_putnubrbase(va_arg(argptr, unsigned int), 1, 16);
+			if (str[i + 1] == 'u')
+				ft_putnubrbase(va_arg(argptr, unsigned int), 0, 10);
+			if (str[i + 1] == 'i')
+				ft_putnbr_fd(va_arg(argptr, int), 1);
 			i += 2;
 			continue;
 		}

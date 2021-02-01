@@ -9,3 +9,4 @@ ni_*
 main.c
 *.out
 .dist
+.plist

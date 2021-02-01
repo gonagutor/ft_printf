@@ -6,14 +6,14 @@
 #    By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/11 14:51:57 by gaguado-          #+#    #+#              #
-#    Updated: 2021/01/25 14:06:10 by gaguado-         ###   ########.fr        #
+#    Updated: 2021/02/01 17:55:14 by gaguado-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC =			gcc
 INCLUDES =		includes
 LIBFT =			libft
-FLAGS =			-Wall -Wextra -Werror -I./$(INCLUDES) $(LIBFT)/libft.h -c
+FLAGS =			-Wall -Wextra -Werror -I./$(INCLUDES) -c
 OBJ_DIR =		objs
 SRC_DIR =		srcs
 NAME =			libftprintf.a
@@ -28,6 +28,7 @@ $(NAME): $(OBJS)
 
 $(OBJS): $(FILES)
 	$(MAKE) -C ./$(LIBFT)
+	cp $(LIBFT)/libft.a $(NAME)
 	$(CC) $(FLAGS) $(FILES)
 
 
