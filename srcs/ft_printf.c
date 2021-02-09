@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/02/01 17:17:45 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/02/03 14:34:19 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,50 @@ void	ft_putnubrbase(unsigned long x, int may, int base)
 	ft_putchar_fd((may) ? ft_toupper(ft_base(x % base)) : ft_base(x % base), 1);
 }
 
+int		ft_print_char_repeatedly(char toprint, int times)
+{
+	int i;
+
+	i = 0;
+	while (i++ < times)
+		ft_putchar_fd(toprint, 1);
+	return (0);
+}
+
 int		ft_printf(const char *str, ...)
 {
 	va_list argptr;
+	va_list argcpy;
 	int		i;
+	int		ret;
 
 	va_start(argptr, str);
 	i = 0;
+	ret = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
 		{
+			va_copy(argcpy, argptr);
+			ft_print_char_repeatedly(' ', ft_atoi(&str[i + 1]) - 1);
+			ret += ft_atoi(&str[i + 1]) - 1;
+			while (ft_isdigit(str[i + 1]))
+				i++;
 			if (str[i + 1] == 's')
+			{
 				ft_putstr_fd(va_arg(argptr, char*), 1);
+				ret += ft_strlen(va_arg(argcpy, char*));
+			}
 			if (str[i + 1] == 'd' || str[i + 1] == 'd')
 				ft_putnbr_fd(va_arg(argptr, int), 1);
-			if (str[i + 1] == 'c')
+			if (str[i + 1] == 'c') {
 				ft_putchar_fd(va_arg(argptr, int), 1);
+				ret++;
+			}
 			if (str[i + 1] == '%')
+			{
 				ft_putchar_fd('%', 1);
+			}
 			if (str[i + 1] == 'p')
 			{
 				ft_putstr_fd("0x", 1);
@@ -78,8 +103,11 @@ int		ft_printf(const char *str, ...)
 			i += 2;
 			continue;
 		}
+		ret++;
 		ft_putchar_fd(str[i], 1);
 		i++;
 	}
-	return (0);
+	va_end(argcpy);
+	va_end(argptr);
+	return (ret);
 }

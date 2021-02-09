@@ -10,3 +10,5 @@ main.c
 *.out
 .dist
 .plist
+**.dSYM
+*.txt
