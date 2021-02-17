@@ -6,108 +6,79 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/02/03 14:34:19 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/02/17 14:28:28 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 #include <stdio.h>
 
-/*
-** This functions takes 2 strings and creates a new one that contains
-** The string *strto* up to *from* + the rest of the string starting
-** from *upto* + the string *strfrom*
-*/
-char	*ft_insert_on_position(int from, int upto, const char* strto, char* strfrom)
+static t_flags	ft_read_flags(const char *str)
 {
-	char *ret;
-
-	ret = malloc(ft_strlen((char*)strto) - (upto + 1 - from) + ft_strlen(strfrom));
-	ft_strlcpy(ret, strto, from + 1);
-	ft_strlcat(ret, strfrom, ft_strlen(strfrom) + ft_strlen(ret) + 1);
-	ft_strlcat(ret, &strto[upto + 1], ft_strlen(ret) + ft_strlen((char *)&strto[upto]) + 1);
-	return (ret);
-}
-
-char	ft_base(int i)
-{
-	if (i > 9)
-		return (i - 10 + 97);
-	return (i + 48);
-}
-
-void	ft_putnubrbase(unsigned long x, int may, int base)
-{
-	if (x / base > 0)
-		ft_putnubrbase(x / base, may, base);
-	ft_putchar_fd((may) ? ft_toupper(ft_base(x % base)) : ft_base(x % base), 1);
-}
-
-int		ft_print_char_repeatedly(char toprint, int times)
-{
-	int i;
+	t_flags next_flag;
+	int		i;
 
 	i = 0;
-	while (i++ < times)
-		ft_putchar_fd(toprint, 1);
+	ft_bzero(&next_flag, sizeof(t_flags));
+	next_flag.flagqtt_mod = ft_atoi(&str[i]);
+	while (!ft_isalpha(str[i]) && str[i] != '\0')
+	{
+		if (str[i] == '0')
+			next_flag.zero_mod = 1;
+		else
+		{
+			while ((str[i] >= '0' && str[i] <= '9') || str[i] == '-')
+				i++;
+			continue;
+		}
+		if (str[i] == '.')
+			next_flag.dot_mod = 1;
+		if (str[i] == '*')
+			next_flag.asterisk_mod = 1;
+		i++;
+	}
+	next_flag.long_mod = (str[i] == 'l') ? 1 : 0;
+	next_flag.flag = str[(next_flag.long_mod) ? i + 1 : i];
+	return (next_flag);
+}
+
+int				ft_flag_detection(t_flags flg, va_list args)
+{
+	if (flg.flag == 'c')
+		return (ft_cflag(flg, args));
+	if (flg.flag == 'p')
+	{
+		ft_print_char_repeatedly(' ', flg.flagqtt_mod);
+		ft_putstr_fd("0x", 1);
+		ft_putnubrbase((unsigned long)va_arg(args, void*), 0, 16);
+		ft_print_char_repeatedly(' ', -1 * flg.flagqtt_mod);
+	}
 	return (0);
 }
 
-int		ft_printf(const char *str, ...)
+int				ft_printf(const char *str, ...)
 {
 	va_list argptr;
-	va_list argcpy;
-	int		i;
-	int		ret;
+	int i;
+	int ret;
 
-	va_start(argptr, str);
 	i = 0;
 	ret = 0;
-	while (str[i] != '\0')
+	va_start(argptr, str);
+	while (str[i])
 	{
 		if (str[i] == '%')
 		{
-			va_copy(argcpy, argptr);
-			ft_print_char_repeatedly(' ', ft_atoi(&str[i + 1]) - 1);
-			ret += ft_atoi(&str[i + 1]) - 1;
-			while (ft_isdigit(str[i + 1]))
+			ret += ft_flag_detection(ft_read_flags(&str[i + 1]), argptr);
+			while (!ft_isalpha(str[i]))
 				i++;
-			if (str[i + 1] == 's')
-			{
-				ft_putstr_fd(va_arg(argptr, char*), 1);
-				ret += ft_strlen(va_arg(argcpy, char*));
-			}
-			if (str[i + 1] == 'd' || str[i + 1] == 'd')
-				ft_putnbr_fd(va_arg(argptr, int), 1);
-			if (str[i + 1] == 'c') {
-				ft_putchar_fd(va_arg(argptr, int), 1);
-				ret++;
-			}
-			if (str[i + 1] == '%')
-			{
-				ft_putchar_fd('%', 1);
-			}
-			if (str[i + 1] == 'p')
-			{
-				ft_putstr_fd("0x", 1);
-				ft_putnubrbase((unsigned long)va_arg(argptr, void*), 0, 16);
-			}
-			if (str[i + 1] == 'x')
-				ft_putnubrbase(va_arg(argptr, unsigned int), 0, 16);
-			if (str[i + 1] == 'X')
-				ft_putnubrbase(va_arg(argptr, unsigned int), 1, 16);
-			if (str[i + 1] == 'u')
-				ft_putnubrbase(va_arg(argptr, unsigned int), 0, 10);
-			if (str[i + 1] == 'i')
-				ft_putnbr_fd(va_arg(argptr, int), 1);
-			i += 2;
+			i++;
 			continue;
 		}
-		ret++;
 		ft_putchar_fd(str[i], 1);
 		i++;
+		ret++;
 	}
-	va_end(argcpy);
 	va_end(argptr);
 	return (ret);
 }

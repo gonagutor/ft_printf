@@ -12,3 +12,4 @@ main.c
 .plist
 **.dSYM
 *.txt
+clean.sh
