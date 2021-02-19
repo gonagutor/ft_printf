@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/02/17 14:28:28 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/02/19 12:37:37 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ static t_flags	ft_read_flags(const char *str)
 	next_flag.flagqtt_mod = ft_atoi(&str[i]);
 	while (!ft_isalpha(str[i]) && str[i] != '\0')
 	{
+		if (str[i] == '-')
+			next_flag.minus_mod = 1;
 		if (str[i] == '0')
-			next_flag.zero_mod = 1;
-		else
-		{
-			while ((str[i] >= '0' && str[i] <= '9') || str[i] == '-')
-				i++;
-			continue;
-		}
+			next_flag.zero_mod = (next_flag.minus_mod) ? 1 : 0;
 		if (str[i] == '.')
+		{
 			next_flag.dot_mod = 1;
+			next_flag.prec_mod = ft_atoi(&str[i + 1]);
+		}
 		if (str[i] == '*')
 			next_flag.asterisk_mod = 1;
 		i++;
@@ -46,6 +45,8 @@ int				ft_flag_detection(t_flags flg, va_list args)
 {
 	if (flg.flag == 'c')
 		return (ft_cflag(flg, args));
+	if (flg.flag == 's')
+		return (ft_sflag(flg, args));
 	if (flg.flag == 'p')
 	{
 		ft_print_char_repeatedly(' ', flg.flagqtt_mod);
@@ -53,14 +54,26 @@ int				ft_flag_detection(t_flags flg, va_list args)
 		ft_putnubrbase((unsigned long)va_arg(args, void*), 0, 16);
 		ft_print_char_repeatedly(' ', -1 * flg.flagqtt_mod);
 	}
+	if (flg.flag == 'd')
+		return (0);
+	if (flg.flag == 'i')
+		return (0);
+	if (flg.flag == 'u')
+		return (0);
+	if (flg.flag == 'x')
+		return (0);
+	if (flg.flag == 'X')
+		return (0);
+	if (flg.flag == '%')
+		return (0);
 	return (0);
 }
 
 int				ft_printf(const char *str, ...)
 {
 	va_list argptr;
-	int i;
-	int ret;
+	int		i;
+	int		ret;
 
 	i = 0;
 	ret = 0;

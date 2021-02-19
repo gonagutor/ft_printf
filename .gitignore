@@ -13,3 +13,5 @@ main.c
 **.dSYM
 *.txt
 clean.sh
+useless
+**pft/
