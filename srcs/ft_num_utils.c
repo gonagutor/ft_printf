@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 14:23:30 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/01 13:57:49 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/01 17:46:45 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int		ft_putnubrbase(unsigned long x, int may, int base)
 	return (ret);
 }
 
-int		ft_countnubrbase(unsigned long x, int base)
+int		ft_ncbase(unsigned long x, int base)
 {
 	int ret;
 
 	ret = 0;
 	if (x / base > 0)
-		ret += ft_countnubrbase(x / base, base) + 1;
+		ret += ft_ncbase(x / base, base) + 1;
 	return (ret);
 }
