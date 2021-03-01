@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/02/19 12:37:37 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/01 17:43:09 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static t_flags	ft_read_flags(const char *str)
 	i = 0;
 	ft_bzero(&next_flag, sizeof(t_flags));
 	next_flag.flagqtt_mod = ft_atoi(&str[i]);
-	while (!ft_isalpha(str[i]) && str[i] != '\0')
+	while (!ft_isalpha(str[i]) && str[i] != '\0' && str[i] != '%')
 	{
 		if (str[i] == '-')
 			next_flag.minus_mod = 1;
 		if (str[i] == '0')
-			next_flag.zero_mod = (next_flag.minus_mod) ? 1 : 0;
+			next_flag.zero_mod = (next_flag.minus_mod) ? 0 : 1;
 		if (str[i] == '.')
 		{
 			next_flag.dot_mod = 1;
@@ -37,7 +37,7 @@ static t_flags	ft_read_flags(const char *str)
 		i++;
 	}
 	next_flag.long_mod = (str[i] == 'l') ? 1 : 0;
-	next_flag.flag = str[(next_flag.long_mod) ? i + 1 : i];
+	next_flag.flag = str[i + next_flag.long_mod];
 	return (next_flag);
 }
 
@@ -48,12 +48,7 @@ int				ft_flag_detection(t_flags flg, va_list args)
 	if (flg.flag == 's')
 		return (ft_sflag(flg, args));
 	if (flg.flag == 'p')
-	{
-		ft_print_char_repeatedly(' ', flg.flagqtt_mod);
-		ft_putstr_fd("0x", 1);
-		ft_putnubrbase((unsigned long)va_arg(args, void*), 0, 16);
-		ft_print_char_repeatedly(' ', -1 * flg.flagqtt_mod);
-	}
+		return (ft_pflag(flg, args));
 	if (flg.flag == 'd')
 		return (0);
 	if (flg.flag == 'i')
@@ -65,7 +60,7 @@ int				ft_flag_detection(t_flags flg, va_list args)
 	if (flg.flag == 'X')
 		return (0);
 	if (flg.flag == '%')
-		return (0);
+		return (ft_pctflag(flg));
 	return (0);
 }
 

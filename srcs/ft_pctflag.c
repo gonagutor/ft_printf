@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_num_utils.c                                     :+:      :+:    :+:   */
+/*   ft_pctflag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/17 14:23:30 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/01 13:57:49 by gaguado-         ###   ########.fr       */
+/*   Created: 2021/03/01 16:23:58 by gaguado-          #+#    #+#             */
+/*   Updated: 2021/03/01 16:38:45 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 
-char	ft_base(int i)
+int	ft_pctflag(t_flags flg)
 {
-	if (i > 9)
-		return (i - 10 + 97);
-	return (i + 48);
-}
+	int		ret;
 
-int		ft_putnubrbase(unsigned long x, int may, int base)
-{
-	int ret;
-
-	ret = 0;
-	if (x / base > 0)
-		ret += ft_putnubrbase(x / base, may, base) + 1;
-	ft_putchar_fd((may) ? ft_toupper(ft_base(x % base)) : ft_base(x % base), 1);
-	return (ret);
-}
-
-int		ft_countnubrbase(unsigned long x, int base)
-{
-	int ret;
-
-	ret = 0;
-	if (x / base > 0)
-		ret += ft_countnubrbase(x / base, base) + 1;
+	ret = 1;
+	ft_print_char_repeatedly(flg.zero_mod ? '0' : ' ', flg.flagqtt_mod - 1);
+	ft_putchar_fd('%', 1);
+	ft_print_char_repeatedly(' ', (flg.flagqtt_mod * -1) - 1);
+	if (flg.flagqtt_mod > ret)
+		ret += flg.flagqtt_mod - 1;
+	if (flg.flagqtt_mod < ret)
+		ret += -1 * flg.flagqtt_mod - 1;
 	return (ret);
 }

@@ -6,7 +6,7 @@
 #    By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/11 14:51:57 by gaguado-          #+#    #+#              #
-#    Updated: 2021/02/17 15:43:57 by gaguado-         ###   ########.fr        #
+#    Updated: 2021/03/01 16:24:21 by gaguado-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,13 @@ OBJ_DIR =		objs
 SRC_DIR =		srcs
 NAME =			libftprintf.a
 
-FILENAMES =		ft_printf.c ft_cflag.c ft_num_utils.c ft_flag_utils.c ft_sflag.c
+FILENAMES =		ft_printf.c \
+				ft_cflag.c \
+				ft_num_utils.c \
+				ft_flag_utils.c \
+				ft_sflag.c \
+				ft_pflag.c \
+				ft_pctflag.c
 
 OBJS =			$(FILENAMES:%.c=%.o)
 FILES =			$(addprefix $(SRC_DIR)/, $(FILENAMES))
