@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 14:23:30 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/01 17:46:45 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/05 18:10:37 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,10 @@ int		ft_ncbase(unsigned long x, int base)
 	ret = 0;
 	if (x / base > 0)
 		ret += ft_ncbase(x / base, base) + 1;
-	return (ret);
+	return ((ret == 0 && x == 0) ? 0 : ret);
+}
+
+long	ft_abs(long x)
+{
+	return (x > 0) ? x : x * -1;
 }

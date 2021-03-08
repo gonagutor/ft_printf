@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/01 17:44:03 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/08 19:18:48 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_flags	ft_read_flags(const char *str)
 	{
 		if (str[i] == '-')
 			next_flag.minus_mod = 1;
-		if (str[i] == '0')
+		if (str[i] == '0' && str[i - 1] != '.' && str[i - 1] != '0')
 			next_flag.zero_mod = (next_flag.minus_mod) ? 0 : 1;
 		if (str[i] == '.')
 		{
@@ -33,7 +33,7 @@ static t_flags	ft_read_flags(const char *str)
 			next_flag.prec_mod = ft_atoi(&str[i + 1]);
 		}
 		if (str[i] == '*')
-			next_flag.asterisk_mod = 1;
+			next_flag.asterisk_mod += 1;
 		i++;
 	}
 	next_flag.long_mod = (str[i] == 'l') ? 1 : 0;
@@ -56,9 +56,9 @@ int				ft_flag_detection(t_flags flg, va_list args)
 	if (flg.flag == 'u')
 		return (0);
 	if (flg.flag == 'x')
-		return (0);
+		return (ft_xflag(flg, args, 0));
 	if (flg.flag == 'X')
-		return (0);
+		return (ft_xflag(flg, args, 1));
 	if (flg.flag == '%')
 		return (ft_pctflag(flg));
 	return (0);
@@ -78,7 +78,8 @@ int				ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			ret += ft_flag_detection(ft_read_flags(&str[i + 1]), argptr);
-			while (!ft_isalpha(str[i]))
+			i++;
+			while (!ft_isalpha(str[i]) && str[i] != '%')
 				i++;
 			i++;
 			continue;
