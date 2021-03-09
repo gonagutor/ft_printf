@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/08 19:18:48 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/09 15:43:19 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static t_flags	ft_read_flags(const char *str)
 
 	i = 0;
 	ft_bzero(&next_flag, sizeof(t_flags));
+	while (str[i] == '0')
+	{
+		next_flag.zero_mod = (next_flag.minus_mod) ? 0 : 1;
+		i++;
+	}
 	next_flag.flagqtt_mod = ft_atoi(&str[i]);
 	while (!ft_isalpha(str[i]) && str[i] != '\0' && str[i] != '%')
 	{
