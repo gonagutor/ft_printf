@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/09 15:43:19 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/10 18:45:55 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ static t_flags	ft_read_flags(const char *str)
 	while (!ft_isalpha(str[i]) && str[i] != '\0' && str[i] != '%')
 	{
 		if (str[i] == '-')
+		{
 			next_flag.minus_mod = 1;
+			next_flag.zero_mod = 0;
+		}
 		if (str[i] == '0' && str[i - 1] != '.' && str[i - 1] != '0')
 			next_flag.zero_mod = (next_flag.minus_mod) ? 0 : 1;
 		if (str[i] == '.')
@@ -53,11 +56,11 @@ int				ft_flag_detection(t_flags flg, va_list args)
 	if (flg.flag == 's')
 		return (ft_sflag(flg, args));
 	if (flg.flag == 'p')
-		return (ft_pflag(flg, args)); // Esto no se puede combinar con %x o %X no lo intentes
+		return (ft_pflag(flg, args));
 	if (flg.flag == 'd')
-		return (0);
+		return (ft_dflag(flg, args));
 	if (flg.flag == 'i')
-		return (0);
+		return (ft_dflag(flg, args));
 	if (flg.flag == 'u')
 		return (0);
 	if (flg.flag == 'x')

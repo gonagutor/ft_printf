@@ -6,7 +6,7 @@
 #    By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/11 14:51:57 by gaguado-          #+#    #+#              #
-#    Updated: 2021/03/02 13:43:33 by gaguado-         ###   ########.fr        #
+#    Updated: 2021/03/10 17:22:42 by gaguado-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ FILENAMES =		ft_printf.c \
 				ft_sflag.c \
 				ft_pflag.c \
 				ft_pctflag.c \
-				ft_xflag.c
+				ft_xflag.c \
+				ft_dflag.c
 
 OBJS =			$(FILENAMES:%.c=%.o)
 FILES =			$(addprefix $(SRC_DIR)/, $(FILENAMES))

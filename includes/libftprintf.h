@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:17:20 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/05 17:56:13 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/10 17:29:07 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ int				ft_flag_detection(t_flags flg, va_list args);
 char			ft_base(int i);
 int				ft_putnubrbase(unsigned long x, int may, int base);
 int				ft_ncbase(unsigned long x, int base);
+int				ft_ncsigned(long x);
 int				ft_putstr_upton(const char *str, int upto);
 long			ft_abs(long x);
 int				ft_sflag(t_flags flg, va_list args);
 int				ft_cflag(t_flags flg, va_list args);
 int				ft_pflag(t_flags flg, va_list args);
+int				ft_dflag(t_flags flg, va_list args);
 int				ft_xflag(t_flags flg, va_list args, int mayus);
 int				ft_pctflag(t_flags flg);
 int				ft_printf(const char *str, ...);
