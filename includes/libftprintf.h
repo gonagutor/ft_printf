@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:17:20 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/10 17:29:07 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/16 13:05:19 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				ft_sflag(t_flags flg, va_list args);
 int				ft_cflag(t_flags flg, va_list args);
 int				ft_pflag(t_flags flg, va_list args);
 int				ft_dflag(t_flags flg, va_list args);
-int				ft_xflag(t_flags flg, va_list args, int mayus);
+int				ft_xflag(t_flags flg, va_list args, int mayus, int base);
 int				ft_pctflag(t_flags flg);
 int				ft_printf(const char *str, ...);
 

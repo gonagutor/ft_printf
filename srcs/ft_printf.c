@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/10 18:45:55 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/16 13:05:12 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ int				ft_flag_detection(t_flags flg, va_list args)
 	if (flg.flag == 'i')
 		return (ft_dflag(flg, args));
 	if (flg.flag == 'u')
-		return (0);
+		return (ft_xflag(flg, args, 1, 10));
 	if (flg.flag == 'x')
-		return (ft_xflag(flg, args, 0));
+		return (ft_xflag(flg, args, 0, 16));
 	if (flg.flag == 'X')
-		return (ft_xflag(flg, args, 1));
+		return (ft_xflag(flg, args, 1, 16));
 	if (flg.flag == '%')
 		return (ft_pctflag(flg));
 	return (0);
