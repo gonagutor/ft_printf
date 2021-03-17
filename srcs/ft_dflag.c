@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:02:01 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/16 12:56:30 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:38:10 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,17 @@ int	ft_dflag(t_flags flg, va_list args)
 	int				spaces;
 
 	ret = 0;
-	if (flg.asterisk_mod)
+	if ((flg.asterisk_mod && (!(flg.dot_mod || flg.prec_mod) || flg.asterisk_mod >= 2)))
+		flg.flagqtt_mod = va_arg(args, int);
+	if ((flg.asterisk_mod && flg.prec_mod == 0 && flg.dot_mod) ||
+		flg.asterisk_mod >= 2)
 		flg.prec_mod = va_arg(args, int);
 	num = va_arg(args, int);
 	zeros = ft_abs(flg.prec_mod) - ft_ncsigned(num)
 		- (num != 0 || flg.dot_mod == 0) + (num < 0);
 	spaces = ft_dspaces(flg, num, 0);
+	if (flg.minus_mod && flg.flagqtt_mod > 0)
+		flg.flagqtt_mod *= -1;
 	if (num < 0 && (flg.zero_mod && !flg.dot_mod))
 		ft_putchar_fd('-', 1);
 	ft_print_char_repeatedly((flg.zero_mod && !flg.dot_mod) ? '0' : ' ',
