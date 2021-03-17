@@ -6,7 +6,7 @@
 #    By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/11 14:51:57 by gaguado-          #+#    #+#              #
-#    Updated: 2021/03/10 17:22:42 by gaguado-         ###   ########.fr        #
+#    Updated: 2021/03/17 19:53:19 by gaguado-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,9 @@ fclean: clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C ./$(LIBFT)
 
+norme:
+	old_norminette $(SRC_DIR)/*.[ch]
+
 re: fclean all
 
-.PHONY: all clean fclean re so
+.PHONY: all clean fclean re so norme
