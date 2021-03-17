@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:17:20 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/16 13:05:19 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/17 19:50:40 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 typedef struct	s_flags
 {
-	int		zero_mod; // 0
-	int		flagqtt_mod; // Random Num 
-	int		dot_mod; // .
-	int		asterisk_mod; // *
-	int		long_mod; // l
-	int		prec_mod; // Random Num behind .
-	int		minus_mod; // -
-	char	flag; // cspdiuxX%
+	int		zero_mod;
+	int		flagqtt_mod;
+	int		dot_mod;
+	int		asterisk_mod;
+	int		long_mod;
+	int		prec_mod;
+	int		minus_mod;
+	char	flag;
 }				t_flags;
 
 int				ft_print_char_repeatedly(char toprint, int times);
@@ -34,6 +34,7 @@ int				ft_putnubrbase(unsigned long x, int may, int base);
 int				ft_ncbase(unsigned long x, int base);
 int				ft_ncsigned(long x);
 int				ft_putstr_upton(const char *str, int upto);
+int				ft_putnubrbase(unsigned long x, int may, int base);
 long			ft_abs(long x);
 int				ft_sflag(t_flags flg, va_list args);
 int				ft_cflag(t_flags flg, va_list args);

@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:02:01 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/17 18:38:10 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/17 19:50:22 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,15 @@ int	ft_dflag(t_flags flg, va_list args)
 	int				spaces;
 
 	ret = 0;
-	if ((flg.asterisk_mod && (!(flg.dot_mod || flg.prec_mod) || flg.asterisk_mod >= 2)))
+	if ((flg.asterisk_mod && (!(flg.dot_mod || flg.prec_mod)
+		|| flg.asterisk_mod >= 2)))
 		flg.flagqtt_mod = va_arg(args, int);
 	if ((flg.asterisk_mod && flg.prec_mod == 0 && flg.dot_mod) ||
 		flg.asterisk_mod >= 2)
 		flg.prec_mod = va_arg(args, int);
 	num = va_arg(args, int);
+	if (flg.prec_mod < 0 && num != 0)
+		flg.prec_mod = 0;
 	zeros = ft_abs(flg.prec_mod) - ft_ncsigned(num)
 		- (num != 0 || flg.dot_mod == 0) + (num < 0);
 	spaces = ft_dspaces(flg, num, 0);
@@ -68,7 +71,7 @@ int	ft_dflag(t_flags flg, va_list args)
 	if (flg.dot_mod)
 		ft_print_char_repeatedly('0', zeros);
 	if (num != 0 || flg.dot_mod == 0)
-		ft_putnbr_fd(ft_abs(num), 1);
+		ft_putnubrbase(ft_abs(num), 0, 10);
 	spaces = ft_dspaces(flg, num, 1);
 	ret += ft_print_char_repeatedly(' ', spaces);
 	return (ret);
