@@ -6,12 +6,31 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/17 17:29:04 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/18 20:22:47 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 #include <stdio.h>
+
+t_flags ft_flagchecks(const char *str, t_flags next_flag, int i)
+{
+	if (str[i] == '-')
+	{
+		next_flag.minus_mod = 1;
+		next_flag.zero_mod = 0;
+	}
+	if (str[i] == '0' && str[i - 1] != '.' && str[i - 1] != '0')
+		next_flag.zero_mod = (next_flag.minus_mod) ? 0 : 1;
+	if (str[i] == '.')
+	{
+		next_flag.dot_mod = 1;
+		next_flag.prec_mod = ft_atoi(&str[i + 1]);
+	}
+	if (str[i] == '*')
+		next_flag.asterisk_mod += 1;
+	return (next_flag);
+}
 
 static t_flags	ft_read_flags(const char *str)
 {
@@ -27,25 +46,12 @@ static t_flags	ft_read_flags(const char *str)
 	}
 	next_flag.flagqtt_mod = ft_atoi(&str[i]);
 	while (!ft_isalpha(str[i]) && str[i] != '\0' && str[i] != '%')
+		next_flag = ft_flagchecks(str, next_flag, i++);
+	if (str[i] || (str[i] == 'l' && str[i + 1]))
 	{
-		if (str[i] == '-')
-		{
-			next_flag.minus_mod = 1;
-			next_flag.zero_mod = 0;
-		}
-		if (str[i] == '0' && str[i - 1] != '.' && str[i - 1] != '0')
-			next_flag.zero_mod = (next_flag.minus_mod) ? 0 : 1;
-		if (str[i] == '.')
-		{
-			next_flag.dot_mod = 1;
-			next_flag.prec_mod = ft_atoi(&str[i + 1]);
-		}
-		if (str[i] == '*')
-			next_flag.asterisk_mod += 1;
-		i++;
+		next_flag.long_mod = (str[i] == 'l') ? 1 : 0;
+		next_flag.flag = str[i + next_flag.long_mod];
 	}
-	next_flag.long_mod = (str[i] == 'l') ? 1 : 0;
-	next_flag.flag = str[i + next_flag.long_mod];
 	return (next_flag);
 }
 
