@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:34:52 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/16 13:05:16 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/18 03:30:21 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,13 @@ int	ft_xflag(t_flags flg, va_list args, int mayus, int base)
 	zeros = ft_abs(flg.prec_mod) - ft_ncbase(num, base)
 		- (num != 0 || flg.dot_mod == 0);
 	spaces = ft_xspaces(flg, num, 0, base);
-	ft_print_char_repeatedly((flg.zero_mod && !flg.dot_mod) ? '0' : ' ',
+	ret += ft_print_char_repeatedly((flg.zero_mod && !flg.dot_mod) ? '0' : ' ',
 		spaces);
 	if (flg.dot_mod)
-		ft_print_char_repeatedly('0', zeros);
+		ret += ft_print_char_repeatedly('0', zeros);
 	if (num != 0 || flg.dot_mod == 0)
-		ret += ft_putnubrbase(num, mayus, base);
+		ft_putnubrbase(num, mayus, base);
 	spaces = ft_xspaces(flg, num, 1, base);
-	ft_print_char_repeatedly(' ', spaces);
-	ret += (-1 * flg.flagqtt_mod) - ft_ncbase(num, base);
-	return (ret);
+	ret += ft_print_char_repeatedly(' ', spaces);
+	return (ret + ft_ncbase(num, base) + (num != 0 || flg.dot_mod == 0));
 }

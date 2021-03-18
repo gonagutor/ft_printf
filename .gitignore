@@ -15,4 +15,5 @@ main.c
 clean.sh
 useless
 **pft/
-42TESTERS-PRINTF
+42TESTERS-PRINTF/
+pft_2019/

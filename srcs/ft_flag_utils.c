@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 14:27:23 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/02/19 13:42:55 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/18 02:54:22 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			ft_print_char_repeatedly(char toprint, int times)
 	i = 0;
 	while (i++ < times)
 		ft_putchar_fd(toprint, 1);
-	return (0);
+	return (i - 1);
 }
 
 int			ft_putstr_upton(const char *str, int upto)
