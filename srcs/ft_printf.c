@@ -6,14 +6,14 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 15:50:28 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:36:28 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 #include <stdio.h>
 
-t_flags ft_flagchecks(const char *str, t_flags next_flag, int i)
+t_flags			ft_flagchecks(const char *str, t_flags next_flag, int i)
 {
 	if (str[i] == '-')
 	{

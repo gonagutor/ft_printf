@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:02:01 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:29:42 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:40:22 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ int	ft_dflag(t_flags flg, va_list args)
 	if (flg.minus_mod && flg.flagqtt_mod > 0)
 		flg.flagqtt_mod *= -1;
 	if (num < 0 && (flg.zero_mod && !flg.dot_mod))
-		ft_putchar_fd('-', 1); ret ++;
+	{
+		ft_putchar_fd('-', 1);
+		ret++;
+	}
 	ret += ft_print_char_repeatedly((flg.zero_mod && !flg.dot_mod) ? '0' : ' ',
 		spaces);
 	if (num < 0 && !(flg.zero_mod && !flg.dot_mod))

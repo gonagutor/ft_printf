@@ -6,27 +6,17 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 15:33:08 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/18 20:40:33 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:39:25 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 
-int	ft_sflag(t_flags flg, va_list args)
+int ft_spadding(t_flags flg, char* str)
 {
-	int		ret;
-	char	*str;
+	int ret;
 
 	ret = 0;
-	if ((flg.asterisk_mod && ((!flg.dot_mod || flg.prec_mod)
-		|| flg.asterisk_mod >= 2)))
-		flg.flagqtt_mod = va_arg(args, int);
-	if ((flg.asterisk_mod && flg.prec_mod == 0 && flg.dot_mod) ||
-		flg.asterisk_mod >= 2)
-		flg.prec_mod = va_arg(args, int);
-	str = va_arg(args, char*);
-	if (str == NULL)
-		str = "(null)\0";
 	if (flg.minus_mod && flg.flagqtt_mod > 0)
 		flg.flagqtt_mod *= -1;
 	if (flg.dot_mod && flg.prec_mod > -1)
@@ -43,5 +33,24 @@ int	ft_sflag(t_flags flg, va_list args)
 		ret += ft_putstr_upton(str, ft_strlen(str));
 	}
 	ret += ft_print_char_repeatedly(' ', (-1 * flg.flagqtt_mod) - ret);
+	return (ret);
+}
+
+int	ft_sflag(t_flags flg, va_list args)
+{
+	int		ret;
+	char	*str;
+
+	ret = 0;
+	if ((flg.asterisk_mod && ((!flg.dot_mod || flg.prec_mod)
+		|| flg.asterisk_mod >= 2)))
+		flg.flagqtt_mod = va_arg(args, int);
+	if ((flg.asterisk_mod && flg.prec_mod == 0 && flg.dot_mod) ||
+		flg.asterisk_mod >= 2)
+		flg.prec_mod = va_arg(args, int);
+	str = va_arg(args, char*);
+	if (str == NULL)
+		str = "(null)\0";
+	ret += ft_spadding(flg, str);
 	return (ret);
 }

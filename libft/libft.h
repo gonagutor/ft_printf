@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 17:17:27 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/01/21 18:20:24 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:34:02 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+
 /*
 ** Converts a string to an int and returns it
 */
@@ -47,12 +48,13 @@ int				ft_isdigit(int c);
 */
 int				ft_isprint(int c);
 /*
-** Copies a section of the memory on source to another section of the memory unless the
-** character c appears on the string or up to n length
+** Copies a section of the memory on source to another section of the memory
+** unless the character c appears on the string or up to n length
 */
 void			*ft_memccpy(void *dest, const void *source, int c, size_t n);
 /*
-** Finds the first ocurrence of the given character in the given string up to n bytes
+** Finds the first ocurrence of the given character in the given string up
+** to n bytes
 */
 void			*ft_memchr(const void *s, int c, size_t n);
 /*
