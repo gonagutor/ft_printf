@@ -6,13 +6,13 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 15:33:08 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:39:25 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:51:35 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 
-int ft_spadding(t_flags flg, char* str)
+int	ft_spadding(t_flags flg, char *str)
 {
 	int ret;
 
@@ -22,14 +22,17 @@ int ft_spadding(t_flags flg, char* str)
 	if (flg.dot_mod && flg.prec_mod > -1)
 	{
 		if ((int)ft_strlen(str) < flg.prec_mod)
-			ret += ft_print_char_repeatedly(' ', flg.flagqtt_mod - ft_strlen(str));
+			ret += ft_print_char_repeatedly(' ', flg.flagqtt_mod
+				- ft_strlen(str));
 		else
-			ret += ft_print_char_repeatedly(' ', flg.flagqtt_mod - flg.prec_mod);
+			ret += ft_print_char_repeatedly(' ', flg.flagqtt_mod
+				- flg.prec_mod);
 		ret += ft_putstr_upton(str, flg.prec_mod);
 	}
 	else
 	{
-		ret += ft_print_char_repeatedly((flg.zero_mod)? '0' : ' ', flg.flagqtt_mod - ft_strlen(str));
+		ret += ft_print_char_repeatedly((flg.zero_mod) ? '0' : ' ',
+			flg.flagqtt_mod - ft_strlen(str));
 		ret += ft_putstr_upton(str, ft_strlen(str));
 	}
 	ret += ft_print_char_repeatedly(' ', (-1 * flg.flagqtt_mod) - ret);
