@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:02:01 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:43:07 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:45:55 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,13 @@ int	ft_dspaces(t_flags flg, long num, int neg)
 	return (spaces);
 }
 
-int	ft_dflag(t_flags flg, va_list args)
+int	ft_dpadding(t_flags flg, int num)
 {
-	int				ret;
-	long			num;
-	int				zeros;
-	int				spaces;
+	int zeros;
+	int spaces;
+	int ret;
 
 	ret = 0;
-	if ((flg.asterisk_mod && ((!flg.dot_mod || flg.prec_mod)
-		|| flg.asterisk_mod >= 2)))
-		flg.flagqtt_mod = va_arg(args, int);
-	if ((flg.asterisk_mod && flg.prec_mod == 0 && flg.dot_mod) ||
-		flg.asterisk_mod >= 2)
-		flg.prec_mod = va_arg(args, int);
-	num = va_arg(args, int);
-	if (flg.prec_mod < 0 && num != 0)
-		flg.prec_mod = 0;
 	zeros = ft_abs(flg.prec_mod) - ft_ncsigned(num)
 		- (num != 0 || flg.dot_mod == 0) + (num < 0);
 	spaces = ft_dspaces(flg, num, 0);
@@ -75,5 +65,24 @@ int	ft_dflag(t_flags flg, va_list args)
 		ft_putnubrbase(ft_abs(num), 0, 10);
 	spaces = ft_dspaces(flg, num, 1);
 	ret += ft_print_char_repeatedly(' ', spaces);
+	return (ret);
+}
+
+int	ft_dflag(t_flags flg, va_list args)
+{
+	int				ret;
+	long			num;
+
+	ret = 0;
+	if ((flg.asterisk_mod && ((!flg.dot_mod || flg.prec_mod)
+		|| flg.asterisk_mod >= 2)))
+		flg.flagqtt_mod = va_arg(args, int);
+	if ((flg.asterisk_mod && flg.prec_mod == 0 && flg.dot_mod) ||
+		flg.asterisk_mod >= 2)
+		flg.prec_mod = va_arg(args, int);
+	num = va_arg(args, int);
+	if (flg.prec_mod < 0 && num != 0)
+		flg.prec_mod = 0;
+	ret += ft_dpadding(flg, num);
 	return (ret + ((num != 0 || flg.dot_mod == 0) ? ft_ncsigned(num) : -1));
 }
