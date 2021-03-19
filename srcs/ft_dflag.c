@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:02:01 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:26:43 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:29:42 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 int	ft_dspaces(t_flags flg, long num, int neg)
 {
 	int spaces;
+	int nc;
 
+	nc = ft_ncsigned(num) + 1;
 	spaces = (int)(num != 0 || flg.dot_mod == 0);
 	if (neg)
 	{
-		if (ft_abs(flg.prec_mod) <= ft_ncsigned(num) + 1 + (num < 0)
-			&& flg.dot_mod)
+		if (ft_abs(flg.prec_mod) <= nc + (num < 0) && flg.dot_mod)
 			spaces = (flg.flagqtt_mod * -1) - ft_abs(flg.prec_mod) - spaces
-			- (num < 0 && ft_abs(flg.prec_mod) <= ft_ncsigned(num) + 1);
+			- (num < 0 && ft_abs(flg.prec_mod) <= nc);
 		else
 			spaces = (flg.flagqtt_mod * -1) - ft_abs(ft_abs(flg.prec_mod)
 				- ft_ncsigned(num)) - spaces;
 	}
 	else
 	{
-		if (ft_abs(flg.prec_mod) <= ft_ncsigned(num) + 1 + (num < 0)
-			&& flg.dot_mod)
-			spaces = flg.flagqtt_mod - ft_abs(flg.prec_mod) - spaces
-			- (num < 0 && ft_abs(flg.prec_mod) <= ft_ncsigned(num) + 1);
+		if (ft_abs(flg.prec_mod) <= nc + (num < 0) && flg.dot_mod)
+			spaces = flg.flagqtt_mod - ft_abs(flg.prec_mod) - spaces - (num < 0
+			&& ft_abs(flg.prec_mod) <= nc) + (nc == flg.prec_mod);
 		else
 			spaces = flg.flagqtt_mod - ft_abs(ft_abs(flg.prec_mod)
 				- ft_ncsigned(num)) - spaces;
