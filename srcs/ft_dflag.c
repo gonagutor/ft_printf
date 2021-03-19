@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:02:01 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:10:11 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:18:09 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int	ft_dpadding(t_flags flg, int num)
 	int spaces;
 	int ret;
 
+	ret = 0;
 	zeros = ft_abs(flg.prec_mod) - ft_ncsigned(num)
 		- (num != 0 || flg.dot_mod == 0) + (num < 0);
 	spaces = ft_dspaces(flg, num, 0);
-	if (flg.minus_mod && flg.flagqtt_mod > 0)
-		flg.flagqtt_mod *= -1;
+	flg.flagqtt_mod *= (flg.minus_mod && flg.flagqtt_mod > 0) ? -1 : 1;
 	if (num < 0 && (flg.zero_mod && !flg.dot_mod))
 	{
 		ft_putchar_fd('-', 1);
@@ -73,8 +73,6 @@ int	ft_dflag(t_flags flg, va_list args)
 {
 	int				ret;
 	long			num;
-	int				zeros;
-	int				spaces;
 
 	ret = 0;
 	if ((flg.asterisk_mod && ((!flg.dot_mod || flg.prec_mod)
