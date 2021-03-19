@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:02:01 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:18:09 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:20:43 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int	ft_dflag(t_flags flg, va_list args)
 	num = va_arg(args, int);
 	if (flg.prec_mod < 0 && num != 0)
 		flg.prec_mod = 0;
-	ret += ft_dpadding(flg, num);
+	ret = ft_dpadding(flg, num) + 1;
 	return (ret + ((num != 0 || flg.dot_mod == 0) ? ft_ncsigned(num) : -1));
 }
