@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:34:52 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/18 03:30:21 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/21 20:14:49 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ int	ft_xflag(t_flags flg, va_list args, int mayus, int base)
 	int				spaces;
 
 	ret = 0;
-	if (flg.asterisk_mod)
-		flg.prec_mod = va_arg(args, int);
-	num = (unsigned long)va_arg(args, void*);
+	num = va_arg(args, unsigned long);
 	zeros = ft_abs(flg.prec_mod) - ft_ncbase(num, base)
 		- (num != 0 || flg.dot_mod == 0);
 	spaces = ft_xspaces(flg, num, 0, base);

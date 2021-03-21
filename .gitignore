@@ -17,3 +17,5 @@ useless
 **pft/
 42TESTERS-PRINTF/
 pft_2019/
+printfTester
+ft_printf.h
