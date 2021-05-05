@@ -6,33 +6,42 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:36:28 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/22 17:04:01 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 #include <stdio.h>
 
-t_flags			ft_flagchecks(const char *str, t_flags next_flag, int i)
+t_flags			ft_flagchecks(const char *str, t_flags flg, va_list rgs, int i)
 {
+	int helper;
+
+	helper = 0;
 	if (str[i] == '-')
-	{
-		next_flag.minus_mod = 1;
-		next_flag.zero_mod = 0;
-	}
+		flg.minus_mod = 1;
 	if (str[i] == '0' && str[i - 1] != '.' && str[i - 1] != '0')
-		next_flag.zero_mod = (next_flag.minus_mod) ? 0 : 1;
+		flg.zero_mod = (flg.minus_mod) ? 0 : 1;
 	if (str[i] == '.')
 	{
-		next_flag.dot_mod = 1;
-		next_flag.prec_mod = ft_atoi(&str[i + 1]);
+		flg.dot_mod = 1;
+		flg.prec_mod = ft_atoi(&str[i + 1]);
 	}
 	if (str[i] == '*')
-		next_flag.asterisk_mod += 1;
-	return (next_flag);
+	{
+		flg.asterisk_mod += 1;
+		if (!flg.dot_mod)
+		{
+			helper = va_arg(rgs, int);
+			flg.flagqtt_mod = ((flg.minus_mod && helper > 0) ? -1 : 1) * helper;
+		}
+		else
+			flg.prec_mod = va_arg(rgs, int);
+	}
+	return (flg);
 }
 
-static t_flags	ft_read_flags(const char *str)
+static t_flags	ft_read_flags(const char *str, va_list args)
 {
 	t_flags next_flag;
 	int		i;
@@ -46,7 +55,7 @@ static t_flags	ft_read_flags(const char *str)
 	}
 	next_flag.flagqtt_mod = ft_atoi(&str[i]);
 	while (!ft_isalpha(str[i]) && str[i] != '\0' && str[i] != '%')
-		next_flag = ft_flagchecks(str, next_flag, i++);
+		next_flag = ft_flagchecks(str, next_flag, args, i++);
 	if (str[i] || (str[i] == 'l' && str[i + 1]))
 	{
 		next_flag.long_mod = (str[i] == 'l') ? 1 : 0;
@@ -80,18 +89,18 @@ int				ft_flag_detection(t_flags flg, va_list args)
 
 int				ft_printf(const char *str, ...)
 {
-	va_list argptr;
+	va_list args;
 	int		i;
 	int		ret;
 
 	i = 0;
 	ret = 0;
-	va_start(argptr, str);
+	va_start(args, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
 		{
-			ret += ft_flag_detection(ft_read_flags(&str[i + 1]), argptr);
+			ret += ft_flag_detection(ft_read_flags(&str[i + 1], args), args);
 			i++;
 			while (!ft_isalpha(str[i]) && str[i] != '%' && str[i])
 				i++;
@@ -102,6 +111,6 @@ int				ft_printf(const char *str, ...)
 		i++;
 		ret++;
 	}
-	va_end(argptr);
+	va_end(args);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:02:01 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:45:55 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/21 20:07:38 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_dspaces(t_flags flg, long num, int neg)
 	{
 		if (ft_abs(flg.prec_mod) <= nc + (num < 0) && flg.dot_mod)
 			spaces = (flg.flagqtt_mod * -1) - ft_abs(flg.prec_mod) - spaces
-			- (num < 0 && ft_abs(flg.prec_mod) <= nc);
+			- (num < 0 && ft_abs(flg.prec_mod) <= nc) + (nc == flg.prec_mod);
 		else
 			spaces = (flg.flagqtt_mod * -1) - ft_abs(ft_abs(flg.prec_mod)
 				- ft_ncsigned(num)) - spaces;
@@ -74,12 +74,6 @@ int	ft_dflag(t_flags flg, va_list args)
 	long			num;
 
 	ret = 0;
-	if ((flg.asterisk_mod && ((!flg.dot_mod || flg.prec_mod)
-		|| flg.asterisk_mod >= 2)))
-		flg.flagqtt_mod = va_arg(args, int);
-	if ((flg.asterisk_mod && flg.prec_mod == 0 && flg.dot_mod) ||
-		flg.asterisk_mod >= 2)
-		flg.prec_mod = va_arg(args, int);
 	num = va_arg(args, int);
 	if (flg.prec_mod < 0 && num != 0)
 		flg.prec_mod = 0;

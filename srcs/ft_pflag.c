@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 12:32:54 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:52:54 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/03/21 20:07:24 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@ int	ft_pflag(t_flags flg, va_list args)
 	void			*ptr;
 
 	ret = 0;
-	if ((flg.asterisk_mod && ((!flg.dot_mod || flg.prec_mod)
-		|| flg.asterisk_mod >= 2)))
-		flg.flagqtt_mod = va_arg(args, int);
-	if ((flg.asterisk_mod && flg.prec_mod == 0 && flg.dot_mod) ||
-		flg.asterisk_mod >= 2)
-		flg.prec_mod = va_arg(args, int);
 	ptr = va_arg(args, void*);
 	num = (unsigned long)ptr;
 	ret += ft_ppadding(flg, num, ptr);
