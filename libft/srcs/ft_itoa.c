@@ -6,11 +6,11 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 14:10:52 by gaguado-          #+#    #+#             */
-/*   Updated: 2020/10/04 19:33:01 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:06:31 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 long	power(int n, int p)
 {

@@ -6,15 +6,15 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 19:17:15 by gaguado-          #+#    #+#             */
-/*   Updated: 2020/10/08 21:09:36 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:06:29 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 void	ft_lstadd_back(t_list **lst, t_list *new_list)
 {
-	t_list *list;
+	t_list	*list;
 
 	if (!lst)
 		return ;

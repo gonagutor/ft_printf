@@ -6,13 +6,13 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 00:16:51 by gaguado-          #+#    #+#             */
-/*   Updated: 2020/10/04 17:08:03 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:06:56 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-int		ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
 	if ((c > 64 && c < 91) || (c > 96 && c < 123) || (c > 47 && c < 58))
 		return (1);

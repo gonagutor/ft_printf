@@ -6,11 +6,11 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 14:27:36 by gaguado-          #+#    #+#             */
-/*   Updated: 2020/09/29 14:32:26 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:05:49 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

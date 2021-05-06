@@ -6,15 +6,15 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 14:27:23 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/18 02:54:22 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/05 18:40:19 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 
-int			ft_print_char_repeatedly(char toprint, int times)
+int	ft_print_char_repeatedly(char toprint, int times)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i++ < times)
@@ -22,9 +22,9 @@ int			ft_print_char_repeatedly(char toprint, int times)
 	return (i - 1);
 }
 
-int			ft_putstr_upton(const char *str, int upto)
+int	ft_putstr_upton(const char *str, int upto)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str == NULL)

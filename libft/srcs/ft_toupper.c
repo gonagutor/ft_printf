@@ -6,13 +6,13 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 03:34:17 by gaguado-          #+#    #+#             */
-/*   Updated: 2020/10/04 17:11:27 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:05:49 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-int		ft_toupper(int c)
+int	ft_toupper(int c)
 {
 	if (c > 96 && c < 123)
 		return (c - 32);

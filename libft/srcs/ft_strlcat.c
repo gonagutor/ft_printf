@@ -6,11 +6,11 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 01:46:27 by gaguado-          #+#    #+#             */
-/*   Updated: 2020/10/04 23:26:02 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:05:49 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {

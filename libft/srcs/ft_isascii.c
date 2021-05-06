@@ -6,13 +6,13 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 00:39:34 by gaguado-          #+#    #+#             */
-/*   Updated: 2020/10/04 17:08:24 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:06:49 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-int		ft_isascii(int c)
+int	ft_isascii(int c)
 {
 	if (c > -1 && c < 128)
 		return (1);

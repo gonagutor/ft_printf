@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:34:52 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/21 20:14:49 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/05 18:33:30 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_xspaces(t_flags flg, unsigned long num, int neg, int base)
 {
-	int spaces;
+	int	spaces;
 
 	spaces = (int)(num != 0 || flg.dot_mod == 0);
 	if (neg)
@@ -23,7 +23,7 @@ int	ft_xspaces(t_flags flg, unsigned long num, int neg, int base)
 			spaces = (flg.flagqtt_mod * -1) - ft_abs(flg.prec_mod) - spaces;
 		else
 			spaces = (flg.flagqtt_mod * -1) - ft_abs(ft_abs(flg.prec_mod)
-				- ft_ncbase(num, base)) - spaces;
+					- ft_ncbase(num, base)) - spaces;
 	}
 	else
 	{
@@ -31,7 +31,7 @@ int	ft_xspaces(t_flags flg, unsigned long num, int neg, int base)
 			spaces = flg.flagqtt_mod - ft_abs(flg.prec_mod) - spaces;
 		else
 			spaces = flg.flagqtt_mod - ft_abs(ft_abs(flg.prec_mod)
-				- ft_ncbase(num, base)) - spaces;
+					- ft_ncbase(num, base)) - spaces;
 	}
 	return (spaces);
 }
@@ -48,8 +48,10 @@ int	ft_xflag(t_flags flg, va_list args, int mayus, int base)
 	zeros = ft_abs(flg.prec_mod) - ft_ncbase(num, base)
 		- (num != 0 || flg.dot_mod == 0);
 	spaces = ft_xspaces(flg, num, 0, base);
-	ret += ft_print_char_repeatedly((flg.zero_mod && !flg.dot_mod) ? '0' : ' ',
-		spaces);
+	if (flg.zero_mod && !flg.dot_mod)
+		ret += ft_print_char_repeatedly('0', spaces);
+	else
+		ret += ft_print_char_repeatedly(' ', spaces);
 	if (flg.dot_mod)
 		ret += ft_print_char_repeatedly('0', zeros);
 	if (num != 0 || flg.dot_mod == 0)

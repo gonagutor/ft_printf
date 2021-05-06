@@ -6,11 +6,11 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 20:45:32 by gaguado-          #+#    #+#             */
-/*   Updated: 2020/10/04 23:27:00 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/05 19:07:17 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
