@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:02:01 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/05/05 18:49:23 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/17 12:40:22 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,17 @@ int	ft_dpadding(t_flags flg, int num)
 		ft_putchar_fd('-', 1);
 	ret++;
 	if (flg.zero_mod && !flg.dot_mod)
-		ret += ft_print_char_repeatedly('0', spaces);
+		ret += ft_pcrepeatedly('0', spaces);
 	else
-		ret += ft_print_char_repeatedly(' ', spaces);
+		ret += ft_pcrepeatedly(' ', spaces);
 	if (num < 0 && !(flg.zero_mod && !flg.dot_mod))
 		ft_putchar_fd('-', 1);
 	if (flg.dot_mod)
-		ret += ft_print_char_repeatedly('0', zeros);
+		ret += ft_pcrepeatedly('0', zeros);
 	if (num != 0 || flg.dot_mod == 0)
 		ft_putnubrbase(ft_abs(num), 0, 10);
 	spaces = ft_dspaces(flg, num, 1);
-	ret += ft_print_char_repeatedly(' ', spaces);
-	return (ret);
+	return (ret += ft_pcrepeatedly(' ', spaces));
 }
 
 int	ft_dflag(t_flags flg, va_list args)

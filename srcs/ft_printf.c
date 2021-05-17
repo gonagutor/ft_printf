@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/05/05 18:31:24 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/17 11:10:56 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	ft_printf(const char *str, ...)
 			i++;
 			while (!ft_isalpha(str[i]) && str[i] != '%' && str[i])
 				i++;
-			i += (str[i]);
+			i += (str[i] != '\0');
 			continue ;
 		}
 		ft_putchar_fd(str[i], 1);

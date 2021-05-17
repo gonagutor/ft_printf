@@ -6,13 +6,13 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 14:27:23 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/05/05 18:40:19 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/17 12:39:40 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libftprintf.h"
 
-int	ft_print_char_repeatedly(char toprint, int times)
+int	ft_pcrepeatedly(char toprint, int times)
 {
 	int	i;
 

@@ -6,51 +6,47 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 14:10:52 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/05/05 19:06:31 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/10 13:04:01 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-long	power(int n, int p)
+size_t	ft_charcounter(int n)
 {
-	int		i;
-	long	ret;
+	int	ret;
 
-	ret = 1;
-	i = 0;
-	while (p > i)
-	{
-		ret *= n;
-		i++;
-	}
-	return (ret);
+	ret = 0;
+	if (n / 10 > 0)
+		ret += ft_charcounter(n / 10) + 1;
+	if (ret == 0 && n == 0)
+		return (0);
+	else
+		return (ret);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*ret;
-	int		i;
-	int		z;
-	long	temp;
 	int		neg;
+	size_t	len;
+	char	*tab;
 
-	i = 1;
-	z = -1;
-	neg = (n < 0) ? -1 : 1;
-	temp = (-2147483647 - 1 == n) ? 2147483648 : n * neg;
-	while (temp / power(10, i) > 0)
-		++i;
-	ret = malloc((neg == -1) ? i + 2 : i + 1);
-	if (ret == NULL)
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	neg = (n < 0);
+	if (neg)
+		n *= -1;
+	len = ft_charcounter(n);
+	tab = (char *)malloc(len + neg + 1);
+	if (!tab)
 		return (NULL);
-	if (neg == -1)
-		ret[++z] = '-';
-	while (--i + 1 > 0)
+	tab[len + neg] = '\0';
+	while (len > 0)
 	{
-		ret[++z] = temp / power(10, i) + 48;
-		temp = temp % power(10, i);
+		tab[--len + neg] = n % 10 + 48;
+		n /= 10;
 	}
-	ret[z + 1] = '\0';
-	return (ret);
+	if (neg)
+		tab[0] = '-';
+	return (tab);
 }

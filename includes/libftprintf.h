@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:17:20 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/03/19 18:32:53 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/17 12:40:22 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdarg.h>
 # include "../libft/libft.h"
 
-typedef struct	s_flags
+typedef struct s_flags
 {
 	int		zero_mod;
 	int		flagqtt_mod;
@@ -27,7 +27,7 @@ typedef struct	s_flags
 	char	flag;
 }				t_flags;
 
-int				ft_print_char_repeatedly(char toprint, int times);
+int				ft_pcrepeatedly(char toprint, int times);
 int				ft_flag_detection(t_flags flg, va_list args);
 char			ft_base(int i);
 int				ft_putnubrbase(unsigned long x, int may, int base);

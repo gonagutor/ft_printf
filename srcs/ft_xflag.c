@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:34:52 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/05/05 18:33:30 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/17 12:40:22 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ int	ft_xflag(t_flags flg, va_list args, int mayus, int base)
 		- (num != 0 || flg.dot_mod == 0);
 	spaces = ft_xspaces(flg, num, 0, base);
 	if (flg.zero_mod && !flg.dot_mod)
-		ret += ft_print_char_repeatedly('0', spaces);
+		ret += ft_pcrepeatedly('0', spaces);
 	else
-		ret += ft_print_char_repeatedly(' ', spaces);
+		ret += ft_pcrepeatedly(' ', spaces);
 	if (flg.dot_mod)
-		ret += ft_print_char_repeatedly('0', zeros);
+		ret += ft_pcrepeatedly('0', zeros);
 	if (num != 0 || flg.dot_mod == 0)
 		ft_putnubrbase(num, mayus, base);
 	spaces = ft_xspaces(flg, num, 1, base);
-	ret += ft_print_char_repeatedly(' ', spaces);
+	ret += ft_pcrepeatedly(' ', spaces);
 	return (ret + ft_ncbase(num, base) + (num != 0 || flg.dot_mod == 0));
 }
