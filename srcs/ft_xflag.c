@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:34:52 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/05/17 12:40:22 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/17 16:02:51 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_xspaces(t_flags flg, unsigned long num, int neg, int base)
 {
 	int	spaces;
 
-	spaces = (int)(num != 0 || flg.dot_mod == 0);
+	spaces = (int)(num != 0);
 	if (neg)
 	{
 		if (ft_abs(flg.prec_mod) <= ft_ncbase(num, base) && flg.dot_mod)
@@ -39,14 +39,14 @@ int	ft_xspaces(t_flags flg, unsigned long num, int neg, int base)
 int	ft_xflag(t_flags flg, va_list args, int mayus, int base)
 {
 	int				ret;
-	unsigned long	num;
+	unsigned int	num;
 	int				zeros;
 	int				spaces;
 
 	ret = 0;
 	num = va_arg(args, unsigned long);
 	zeros = ft_abs(flg.prec_mod) - ft_ncbase(num, base)
-		- (num != 0 || flg.dot_mod == 0);
+		- (num != 0);
 	spaces = ft_xspaces(flg, num, 0, base);
 	if (flg.zero_mod && !flg.dot_mod)
 		ret += ft_pcrepeatedly('0', spaces);
