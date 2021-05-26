@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:34:52 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/05/17 16:02:51 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:11:26 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 int	ft_xspaces(t_flags flg, unsigned long num, int neg, int base)
 {
 	int	spaces;
+	int	lzeros;
+	int	numlen;
 
-	spaces = (int)(num != 0);
-	if (neg)
-	{
-		if (ft_abs(flg.prec_mod) <= ft_ncbase(num, base) && flg.dot_mod)
-			spaces = (flg.flagqtt_mod * -1) - ft_abs(flg.prec_mod) - spaces;
-		else
-			spaces = (flg.flagqtt_mod * -1) - ft_abs(ft_abs(flg.prec_mod)
-					- ft_ncbase(num, base)) - spaces;
-	}
+	spaces = 0;
+	numlen = ft_ncbase(num, base) + 1;
+	lzeros = 0;
+	if (flg.dot_mod && flg.prec_mod > 0)
+		lzeros = ft_abs(flg.prec_mod) - numlen + (num == 0 && flg.dot_mod != 0);
+	if (lzeros < 0 || flg.prec_mod < 0)
+		lzeros = (num == 0);
+	if (!neg)
+		spaces = flg.flagqtt_mod - numlen - lzeros
+			+ (num == 0 && flg.dot_mod != 0);
 	else
-	{
-		if (ft_abs(flg.prec_mod) <= ft_ncbase(num, base) && flg.dot_mod)
-			spaces = flg.flagqtt_mod - ft_abs(flg.prec_mod) - spaces;
-		else
-			spaces = flg.flagqtt_mod - ft_abs(ft_abs(flg.prec_mod)
-					- ft_ncbase(num, base)) - spaces;
-	}
+		spaces = (flg.flagqtt_mod * -1) - numlen - lzeros
+			+ (num == 0 && flg.dot_mod != 0);
 	return (spaces);
+	// This for some reason fails and prints zero in some cases.
+	// The problem is probably not here but in the function below
 }
 
 int	ft_xflag(t_flags flg, va_list args, int mayus, int base)
@@ -46,7 +46,7 @@ int	ft_xflag(t_flags flg, va_list args, int mayus, int base)
 	ret = 0;
 	num = va_arg(args, unsigned long);
 	zeros = ft_abs(flg.prec_mod) - ft_ncbase(num, base)
-		- (num != 0);
+		- 1 + (num == 0 && flg.dot_mod != 0);
 	spaces = ft_xspaces(flg, num, 0, base);
 	if (flg.zero_mod && !flg.dot_mod)
 		ret += ft_pcrepeatedly('0', spaces);
