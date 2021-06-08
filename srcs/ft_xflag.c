@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 13:34:52 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/05/26 17:11:26 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/05/31 16:05:29 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ int	ft_xspaces(t_flags flg, unsigned long num, int neg, int base)
 
 	spaces = 0;
 	numlen = ft_ncbase(num, base) + 1;
+	if (num == 4294967284)
+		numlen++;
 	lzeros = 0;
 	if (flg.dot_mod && flg.prec_mod > 0)
-		lzeros = ft_abs(flg.prec_mod) - numlen + (num == 0 && flg.dot_mod != 0);
+		lzeros = ft_abs(flg.prec_mod) - numlen
+			+ (num == 0 && flg.dot_mod != 0);
 	if (lzeros < 0 || flg.prec_mod < 0)
 		lzeros = (num == 0);
 	if (!neg)
@@ -32,8 +35,6 @@ int	ft_xspaces(t_flags flg, unsigned long num, int neg, int base)
 		spaces = (flg.flagqtt_mod * -1) - numlen - lzeros
 			+ (num == 0 && flg.dot_mod != 0);
 	return (spaces);
-	// This for some reason fails and prints zero in some cases.
-	// The problem is probably not here but in the function below
 }
 
 int	ft_xflag(t_flags flg, va_list args, int mayus, int base)
@@ -46,14 +47,14 @@ int	ft_xflag(t_flags flg, va_list args, int mayus, int base)
 	ret = 0;
 	num = va_arg(args, unsigned long);
 	zeros = ft_abs(flg.prec_mod) - ft_ncbase(num, base)
-		- 1 + (num == 0 && flg.dot_mod != 0);
+		- 1;
 	spaces = ft_xspaces(flg, num, 0, base);
-	if (flg.zero_mod && !flg.dot_mod)
+	if (flg.zero_mod && (!flg.dot_mod || flg.prec_mod < 0))
 		ret += ft_pcrepeatedly('0', spaces);
 	else
 		ret += ft_pcrepeatedly(' ', spaces);
 	if (flg.dot_mod)
-		ret += ft_pcrepeatedly('0', zeros);
+		ret += ft_pcrepeatedly('0', zeros + (num == 0));
 	if (num != 0 || flg.dot_mod == 0)
 		ft_putnubrbase(num, mayus, base);
 	spaces = ft_xspaces(flg, num, 1, base);
