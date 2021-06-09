@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 17:02:01 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/06/08 19:15:04 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/06/09 13:11:24 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	ft_dflag(t_flags flg, va_list args)
 	int				ret;
 	long			num;
 	int				zeros;
-	int				spaces;
 	int				neg;
+	int				shouldnt;
 
 	ret = 0;
 	neg = 1;
 	num = va_arg(args, int);
-	int shouldnt = (flg.prec_mod < 0);
+	shouldnt = (flg.prec_mod < 0);
 	if (num < 0)
 		neg = -1;
 	if (flg.prec_mod < 0)
@@ -56,20 +56,18 @@ int	ft_dflag(t_flags flg, va_list args)
 	zeros = flg.prec_mod - ft_ncbase(num * neg, 10) - 1;
 	if (num == 0)
 		zeros = flg.prec_mod - 1;
-	spaces = ft_dspaces(flg, num * neg, 0) - (num < 0);
 	if (num < 0 && (flg.zero_mod && (!flg.dot_mod || shouldnt)))
 		ft_putchar_fd('-', 1);
-	if (flg.zero_mod && (!flg.dot_mod || shouldnt)) // Esto debe comprobar que es 0 si funciona
-		ret += ft_pcrepeatedly('0', spaces);
+	if (flg.zero_mod && (!flg.dot_mod || shouldnt))
+		ret += ft_pcrepeatedly('0', ft_dspaces(flg, num * neg, 0) - (num < 0));
 	else
-		ret += ft_pcrepeatedly(' ', spaces);
+		ret += ft_pcrepeatedly(' ', ft_dspaces(flg, num * neg, 0) - (num < 0));
 	if (num < 0 && !(flg.zero_mod && (!flg.dot_mod || shouldnt)))
 		ft_putchar_fd('-', 1);
 	if (flg.dot_mod)
 		ret += ft_pcrepeatedly('0', zeros + (num == 0));
 	if (num != 0 || flg.dot_mod == 0)
 		ft_putnubrbase(num * (neg), 0, 10);
-	spaces = ft_dspaces(flg, num * neg, 1) - (num < 0);
-	ret += ft_pcrepeatedly(' ', spaces);
+	ret += ft_pcrepeatedly(' ', ft_dspaces(flg, num * neg, 1) - (num < 0));
 	return (ret + ft_ncbase(num * neg, 10) + (num != 0 || flg.dot_mod == 0) + (num < 0));
 }
