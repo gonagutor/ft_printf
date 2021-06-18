@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 17:17:20 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/05/17 12:40:22 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/06/10 13:34:14 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_flags
 	char	flag;
 }				t_flags;
 
-int				ft_pcrepeatedly(char toprint, int times);
+int				ft_pcr(char toprint, int times);
 int				ft_flag_detection(t_flags flg, va_list args);
 char			ft_base(int i);
 int				ft_putnubrbase(unsigned long x, int may, int base);

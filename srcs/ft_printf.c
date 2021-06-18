@@ -6,7 +6,7 @@
 /*   By: gaguado- <gaguado-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:25:22 by gaguado-          #+#    #+#             */
-/*   Updated: 2021/05/17 11:10:56 by gaguado-         ###   ########.fr       */
+/*   Updated: 2021/06/10 13:59:55 by gaguado-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_flags	ft_flagchecks(const char *str, t_flags flg, va_list rgs, int i)
 {
-	int	 helper;
+	int	helper;
 
 	helper = 0;
 	if (str[i] == '-')
